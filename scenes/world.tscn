@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dwpcrlocc02he"]
 
+[ext_resource type="Script" uid="uid://py6c6rw8qd58" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://cl80bvtos3pqn" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_09_black.png" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://dq2edkex2s7pa" path="res://scenes/player.tscn" id="2_rwgxs"]
 
@@ -27,6 +28,7 @@ size = Vector2(20, 20)
 size = Vector3(20, 0.01, 20)
 
 [node name="world" type="Node" unique_id=1945180217]
+script = ExtResource("1_4wyf3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=188404842]
 environment = SubResource("Environment_k0juu")
