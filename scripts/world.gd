@@ -20,3 +20,4 @@ func spawn_zombie():
 	var zombie_instance = ZOMBIE.instantiate()
 	zombie_instance.position = Vector3(zombie_spawner.position.x, 1, zombie_spawner.position.z)
 	add_child(zombie_instance)
+	zombie_instance.get_node_or_null("jumpscare_sound").play()
