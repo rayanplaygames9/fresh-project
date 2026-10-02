@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var head: Node3D = $head
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const SPEED = 7.8
 const JUMP_VELOCITY = 10.0
@@ -22,6 +23,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("left_mouse"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
+	if Input.is_action_just_pressed("left_mouse") and animation_player.current_animation != "swing":
+		animation_player.play("swing")
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity

@@ -3,6 +3,7 @@ extends Node
 @onready var player: CharacterBody3D = $player
 @onready var timer_zombie_spawn: Timer = $timer_zombie_spawn
 @onready var zombie_spawner: Marker3D = $zombie_spawner
+@onready var jumpscare_texture: TextureRect = $CanvasLayer/jumpscare_texture
 
 const ZOMBIE = preload("uid://hx5luk0hknnf")
 
@@ -21,3 +22,6 @@ func spawn_zombie():
 	zombie_instance.position = Vector3(zombie_spawner.position.x, 1, zombie_spawner.position.z)
 	add_child(zombie_instance)
 	zombie_instance.get_node_or_null("jumpscare_sound").play()
+	jumpscare_texture.show()
+	await get_tree().create_timer(.7).timeout
+	jumpscare_texture.hide()

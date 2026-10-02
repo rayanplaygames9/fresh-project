@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dq2edkex2s7pa"]
 
 [ext_resource type="Script" uid="uid://cwwuqc42o2dtb" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://veweg7lqhwb1" path="res://scenes/sword.tscn" id="2_g2els"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0juu"]
 albedo_color = Color(0.12717709, 0.4188247, 0.5712606, 1)
@@ -9,6 +10,67 @@ albedo_color = Color(0.12717709, 0.4188247, 0.5712606, 1)
 material = SubResource("StandardMaterial3D_k0juu")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k1nkd"]
+
+[sub_resource type="Animation" id="Animation_g2els"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head/Camera3D/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.41586637, -0.3080932, -0.35870424)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("head/Camera3D/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, -1.0471976, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "swing"
+length = 0.6666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head/Camera3D/Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector3(0.41586637, -0.3080932, -0.35870424), Vector3(0.41586637, -0.3080932, -0.35870424)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("head/Camera3D/Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector3(-1.5707964, -1.0471976, 0), Vector3(-1.5707964, 0.26179925, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"RESET": SubResource("Animation_g2els"),
+&"swing": SubResource("Animation_qhqgy")
+}
 
 [node name="player" type="CharacterBody3D" unique_id=124275174]
 script = ExtResource("1_3vyb7")
@@ -28,3 +90,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.761866, 0)
 light_energy = 9.045
 light_indirect_energy = 5.827
 light_volumetric_fog_energy = 4.128
+
+[node name="Sword" parent="head/Camera3D" unique_id=1458200605 instance=ExtResource("2_g2els")]
+transform = Transform3D(0.049999997, 0.086602546, 3.785518e-09, 0, -4.371139e-09, 0.10000002, 0.086602546, -0.049999997, -2.1855695e-09, 0.41586637, -0.3080932, -0.35870424)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=32274511]
+libraries/ = SubResource("AnimationLibrary_dqkch")

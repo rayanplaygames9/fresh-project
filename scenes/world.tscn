@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://py6c6rw8qd58" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://cl80bvtos3pqn" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_09_black.png" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://dq2edkex2s7pa" path="res://scenes/player.tscn" id="2_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://fduqf4otk1hw" path="res://assets/images/jumpscare.jpg" id="4_k0juu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -51,6 +52,11 @@ gradient = SubResource("Gradient_4wyf3")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1nkd"]
 emission_shape_scale = Vector3(2, 3, 5)
+inherit_velocity_ratio = 0.117
+velocity_pivot = Vector3(3, 6, 1)
+direction = Vector3(13, 25, 3)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
 angular_velocity_min = 11.999984
 angular_velocity_max = 11.999984
 gravity = Vector3(0, 3, 0)
@@ -103,6 +109,7 @@ mesh = SubResource("BoxMesh_tapir")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="zombie_spawner/MeshInstance3D" unique_id=1483608809]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.041538, 0)
+amount = 12
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_k1nkd")
 draw_pass_1 = SubResource("QuadMesh_tapir")
@@ -110,3 +117,14 @@ draw_pass_1 = SubResource("QuadMesh_tapir")
 [node name="timer_zombie_spawn" type="Timer" parent="." unique_id=1163442340]
 wait_time = 10.0
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=211649224]
+
+[node name="jumpscare_texture" type="TextureRect" parent="CanvasLayer" unique_id=844670441]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_k0juu")
