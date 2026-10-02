@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cwwuqc42o2dtb" path="res://scripts/player.gd" id="1_3vyb7"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0juu"]
+albedo_color = Color(0.12717709, 0.4188247, 0.5712606, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tapir"]
+material = SubResource("StandardMaterial3D_k0juu")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k1nkd"]
 
@@ -19,3 +23,8 @@ shape = SubResource("CapsuleShape3D_k1nkd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.761866, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head" unique_id=557736577]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="head/Camera3D" unique_id=1108209012]
+light_energy = 9.045
+light_indirect_energy = 5.827
+light_volumetric_fog_energy = 4.128

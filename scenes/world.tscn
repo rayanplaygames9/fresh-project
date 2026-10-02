@@ -13,8 +13,16 @@ sky_material = SubResource("ProceduralSkyMaterial_rwgxs")
 
 [sub_resource type="Environment" id="Environment_k0juu"]
 background_mode = 1
-background_color = Color(0.38555804, 0.5776292, 1, 1)
 sky = SubResource("Sky_4wyf3")
+tonemap_exposure = 0.34
+fog_mode = 1
+fog_light_color = Color(0.22418329, 0.24668661, 0.28170124, 1)
+fog_density = 1.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_tapir"]
+vertices = PackedVector3Array(-9.5, 0.095, -9.5, -9.5, 0.095, 9.5, 9.5, 0.095, 9.5, 9.5, 0.095, -9.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_height = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1nkd"]
 albedo_texture = ExtResource("1_nnsk1")
@@ -27,6 +35,42 @@ size = Vector2(20, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhdjb"]
 size = Vector3(20, 0.01, 20)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wyf3"]
+shading_mode = 0
+albedo_color = Color(0.9517564, 0, 0.13104218, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tapir"]
+material = SubResource("StandardMaterial3D_4wyf3")
+
+[sub_resource type="Gradient" id="Gradient_4wyf3"]
+offsets = PackedFloat32Array(0, 0.11510792, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hk6ki"]
+gradient = SubResource("Gradient_4wyf3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1nkd"]
+emission_shape_scale = Vector3(2, 3, 5)
+angular_velocity_min = 11.999984
+angular_velocity_max = 11.999984
+gravity = Vector3(0, 3, 0)
+linear_accel_min = 11.999997
+linear_accel_max = 19.999998
+use_scale_3d = true
+scale_3d_min = Vector3(1, 1, 1)
+scale_3d_max = Vector3(2, 2, 2)
+color = Color(0.7273813, 0.14529493, 0, 1)
+color_ramp = SubResource("GradientTexture1D_hk6ki")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0juu"]
+shading_mode = 0
+albedo_color = Color(0.82769674, 0, 0.06827447, 1)
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_tapir"]
+material = SubResource("StandardMaterial3D_k0juu")
+size = Vector2(0.2, 0.2)
+
 [node name="world" type="Node" unique_id=1945180217]
 script = ExtResource("1_4wyf3")
 
@@ -36,13 +80,33 @@ environment = SubResource("Environment_k0juu")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2133596561]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 
-[node name="floor" type="StaticBody3D" parent="." unique_id=890093596]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="floor" unique_id=1585624133]
-mesh = SubResource("PlaneMesh_tapir")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor" unique_id=1154027872]
-shape = SubResource("BoxShape3D_jhdjb")
-
 [node name="player" parent="." unique_id=124275174 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1969765214]
+navigation_mesh = SubResource("NavigationMesh_tapir")
+
+[node name="floor" type="StaticBody3D" parent="NavigationRegion3D" unique_id=890093596]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/floor" unique_id=1585624133]
+mesh = SubResource("PlaneMesh_tapir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/floor" unique_id=1154027872]
+shape = SubResource("BoxShape3D_jhdjb")
+
+[node name="zombie_spawner" type="Marker3D" parent="." unique_id=902028736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7.888146)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="zombie_spawner" unique_id=1496391077]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.58333844, 0)
+mesh = SubResource("BoxMesh_tapir")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="zombie_spawner/MeshInstance3D" unique_id=1483608809]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.041538, 0)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_k1nkd")
+draw_pass_1 = SubResource("QuadMesh_tapir")
+
+[node name="timer_zombie_spawn" type="Timer" parent="." unique_id=1163442340]
+wait_time = 10.0
+autostart = true

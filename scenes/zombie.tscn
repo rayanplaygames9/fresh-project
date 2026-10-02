@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://hx5luk0hknnf"]
+
+[ext_resource type="Script" uid="uid://xtl27j1d6lg3" path="res://scripts/zombie.gd" id="1_1vlb3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftooa"]
+albedo_color = Color(0.81134, 0.030104822, 3.85046e-07, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tapir"]
+material = SubResource("StandardMaterial3D_ftooa")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k1nkd"]
+
+[node name="zombie" type="CharacterBody3D" unique_id=2002552471 groups=["enemies"]]
+script = ExtResource("1_1vlb3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1681914515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_tapir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1074734561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_k1nkd")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1490591148]
+target_desired_distance = 2.0
+avoidance_enabled = true
+use_3d_avoidance = true
+
+[node name="jumpscare_sound" type="AudioStreamPlayer" parent="." unique_id=1233741283]
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
