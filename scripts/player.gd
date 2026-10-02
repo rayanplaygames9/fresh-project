@@ -24,11 +24,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# Add the gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle jump.
+	# Handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
