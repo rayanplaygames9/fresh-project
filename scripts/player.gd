@@ -8,6 +8,8 @@ extends CharacterBody3D
 @onready var slot_2: Panel = $CanvasLayer/HUD/slot2
 @onready var slot_3: Panel = $CanvasLayer/HUD/slot3
 
+@export var inv: Inv
+
 const SPEED = 7.8
 const JUMP_VELOCITY = 10.0
 
@@ -15,7 +17,9 @@ var gravity := -30.0
 var mouse_sensitivity := 0.005
 var health := 5
 var sword_damage := 1
-var selected_slot = slot
+var selected_slot: Panel
+var selected_item
+var slot_item_pos
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -37,12 +41,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 	if Input.is_action_just_pressed("1"):
 		selected_slot = slot
+		slot_item_pos = 1
 	elif Input.is_action_just_pressed("2"):
 		selected_slot = slot_2
+		slot_item_pos = 2
 	elif Input.is_action_just_pressed("3"):
 		selected_slot = slot_3
+		slot_item_pos = 3
 		
 	print(selected_slot)
+	print(selected_item)
+	print(slot_item_pos)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity

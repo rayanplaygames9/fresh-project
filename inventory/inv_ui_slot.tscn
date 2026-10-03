@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dt2j3ehxckkks"]
+
+[ext_resource type="Texture2D" uid="uid://dnsvshgyv58ym" path="res://inventory/Sample-InventorySlotsSet.png" id="1_dfngl"]
+[ext_resource type="Script" uid="uid://410jau3scp43" path="res://inventory/inv_ui_slot.gd" id="1_fcwim"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("1_dfngl")
+region = Rect2(-0.1250782, 78.9598, 23.904676, 24.06768)
+
+[node name="inv_ui_slot" type="Panel" unique_id=600487287]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(23, 24)
+offset_right = 23.0
+offset_bottom = 24.0
+script = ExtResource("1_fcwim")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1016506859]
+position = Vector2(11, 12)
+texture = SubResource("AtlasTexture_g2els")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=775729838]
+custom_minimum_size = Vector2(23, 24)
+layout_mode = 0
+offset_right = 23.0
+offset_bottom = 24.0
+
+[node name="Panel" type="Panel" parent="CenterContainer" unique_id=1566514556]
+layout_mode = 2
+
+[node name="item_display" type="Sprite2D" parent="CenterContainer/Panel" unique_id=790093805]

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://py6c6rw8qd58" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://cl80bvtos3pqn" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_09_black.png" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://dq2edkex2s7pa" path="res://scenes/player.tscn" id="2_rwgxs"]
+[ext_resource type="Resource" uid="uid://bjwvalm5f0ud" path="res://inventory/playerinv.tres" id="3_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://fduqf4otk1hw" path="res://assets/images/jumpscare.jpg" id="4_k0juu"]
 [ext_resource type="Texture2D" uid="uid://cysnk1kpeebn7" path="res://assets/kenney_particle-pack/PNG (Transparent)/flame_02.png" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://hx5luk0hknnf" path="res://scenes/zombie.tscn" id="5_71j4m"]
@@ -84,6 +85,7 @@ environment = SubResource("Environment_k0juu")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 
 [node name="player" parent="." unique_id=124275174 instance=ExtResource("2_rwgxs")]
+inv = ExtResource("3_4mrxx")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1969765214]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
