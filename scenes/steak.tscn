@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cc75o4c2u4bfu" path="res://assets/models/steak_0.png" id="1_3qkrq"]
 [ext_resource type="Script" uid="uid://bn8qwejnj5clw" path="res://scripts/steak.gd" id="1_u63e7"]
+[ext_resource type="Resource" uid="uid://ctpuc26weidu8" path="res://inventory/items/steak.tres" id="2_u63e7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1gc0l"]
 resource_name = "Steak"
@@ -50,6 +51,7 @@ radius = 0.23358859
 [node name="steak" type="Node3D" unique_id=84950046]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_u63e7")
+item = ExtResource("2_u63e7")
 
 [node name="model" type="MeshInstance3D" parent="." unique_id=2109130610]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, -2.220446e-18, 0, 2.220446e-18, 0.01, 0.11085272, 0, 0.22468185)

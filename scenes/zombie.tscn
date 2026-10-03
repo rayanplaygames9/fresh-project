@@ -50,7 +50,6 @@ use_3d_avoidance = true
 
 [node name="jumpscare_sound" type="AudioStreamPlayer" parent="." unique_id=1233741283]
 stream = ExtResource("2_httt1")
-volume_db = 11.375
 
 [node name="hit_detector" type="Area3D" parent="." unique_id=321997352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
