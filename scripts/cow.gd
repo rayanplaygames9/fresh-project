@@ -50,6 +50,9 @@ func take_damage(amount: int):
 		die()
 		
 func die():
+	# drop raw steak (u need to cook it later lil bro life isnt easy)
+	
+	
 	queue_free()
 
 func _on_timer_change_dir_timeout() -> void:

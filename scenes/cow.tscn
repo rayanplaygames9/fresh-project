@@ -26,9 +26,8 @@ radius = 0.2
 height = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tapir"]
-radius = 0.6458388
 
-[node name="cow" type="CharacterBody3D" unique_id=1893121066]
+[node name="cow" type="CharacterBody3D" unique_id=1893121066 groups=["animals"]]
 script = ExtResource("1_fgglk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1534441169]
@@ -37,7 +36,7 @@ mesh = SubResource("SphereMesh_k1nkd")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=860771573]
 shape = SubResource("SphereShape3D_p41vm")
 
-[node name="timer_change_dir" type="Timer" parent="." unique_id=1100293062 groups=["animals"]]
+[node name="timer_change_dir" type="Timer" parent="." unique_id=1100293062]
 wait_time = 5.0
 autostart = true
 

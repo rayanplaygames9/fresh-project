@@ -58,12 +58,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hit_detector" unique_id=463466279]
 shape = SubResource("CapsuleShape3D_tapir")
 
-[node name="label_health" type="Label3D" parent="." unique_id=1352244108]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3261712, 0)
-billboard = 2
-text = "Health: 3"
-font_size = 64
-
 [node name="damage_particle" type="GPUParticles3D" parent="." unique_id=537729501]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5564017, 0)
 emitting = false
