@@ -4,6 +4,8 @@ extends Node
 @onready var timer_zombie_spawn: Timer = $timer_zombie_spawn
 @onready var jumpscare_texture: TextureRect = $CanvasLayer/jumpscare_texture
 @onready var timer_cow_spawn: Timer = $timer_cow_spawn
+@onready var music_box_coll_area: Area3D = $MusicBox/coll_area
+@onready var phonkbaby: AudioStreamPlayer3D = $MusicBox/PHONKBABY
 
 const ZOMBIE = preload("uid://hx5luk0hknnf")
 const COW = preload("uid://ctqdd4hjxgal0")
@@ -36,3 +38,7 @@ func spawn_cow():
 	var cow_instance = COW.instantiate()
 	cow_instance.position = Vector3(rand_x, 1.0, rand_z)
 	add_child(cow_instance)
+
+func _on_coll_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("players"):
+		phonkbaby.play()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://hey0n5qhvuw0"
+path="res://.godot/imported/MONTAGEM GUERREIRO - Slowed.mp3-90160c588766447d33fa2f0d434a6c6e.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/MONTAGEM GUERREIRO - Slowed.mp3"
+dest_files=["res://.godot/imported/MONTAGEM GUERREIRO - Slowed.mp3-90160c588766447d33fa2f0d434a6c6e.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

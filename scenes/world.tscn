@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cysnk1kpeebn7" path="res://assets/kenney_particle-pack/PNG (Transparent)/flame_02.png" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://hx5luk0hknnf" path="res://scenes/zombie.tscn" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://ctqdd4hjxgal0" path="res://scenes/cow.tscn" id="7_i7141"]
+[ext_resource type="AudioStream" uid="uid://hey0n5qhvuw0" path="res://assets/sound/MONTAGEM GUERREIRO - Slowed.mp3" id="9_7r4gi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -74,6 +75,20 @@ size = Vector2(2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p41vm"]
 size = Vector3(1.676, 0.336, 1.728)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mrxx"]
+shading_mode = 0
+albedo_color = Color(0.9999998, 0.5454908, 0.22470075, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tapir"]
+material = SubResource("StandardMaterial3D_4mrxx")
+size = Vector3(2.066, 5, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7r4gi"]
+data = PackedVector3Array(-1.033, 2.5, 0.5, 1.033, 2.5, 0.5, -1.033, -2.5, 0.5, 1.033, 2.5, 0.5, 1.033, -2.5, 0.5, -1.033, -2.5, 0.5, 1.033, 2.5, -0.5, -1.033, 2.5, -0.5, 1.033, -2.5, -0.5, -1.033, 2.5, -0.5, -1.033, -2.5, -0.5, 1.033, -2.5, -0.5, 1.033, 2.5, 0.5, 1.033, 2.5, -0.5, 1.033, -2.5, 0.5, 1.033, 2.5, -0.5, 1.033, -2.5, -0.5, 1.033, -2.5, 0.5, -1.033, 2.5, -0.5, -1.033, 2.5, 0.5, -1.033, -2.5, -0.5, -1.033, 2.5, 0.5, -1.033, -2.5, 0.5, -1.033, -2.5, -0.5, 1.033, 2.5, 0.5, -1.033, 2.5, 0.5, 1.033, 2.5, -0.5, -1.033, 2.5, 0.5, -1.033, 2.5, -0.5, 1.033, 2.5, -0.5, -1.033, -2.5, 0.5, 1.033, -2.5, 0.5, -1.033, -2.5, -0.5, 1.033, -2.5, 0.5, 1.033, -2.5, -0.5, -1.033, -2.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tapir"]
+size = Vector3(2.0732422, 5.002472, 1.0703125)
 
 [node name="world" type="Node" unique_id=1945180217]
 script = ExtResource("1_4wyf3")
@@ -145,3 +160,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5980797, -0.47499943, 11.03
 [node name="timer_cow_spawn" type="Timer" parent="." unique_id=1345317103]
 wait_time = 20.0
 autostart = true
+
+[node name="MusicBox" type="MeshInstance3D" parent="." unique_id=898065285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.57336, 1.9208374, 29.098022)
+mesh = SubResource("BoxMesh_tapir")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MusicBox" unique_id=2029964445]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MusicBox/StaticBody3D" unique_id=1740126694]
+shape = SubResource("ConcavePolygonShape3D_7r4gi")
+
+[node name="coll_area" type="Area3D" parent="MusicBox" unique_id=1182320426]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MusicBox/coll_area" unique_id=124808004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0024414063, 0.003768921, -0.03515625)
+shape = SubResource("BoxShape3D_tapir")
+
+[node name="Label3D" type="Label3D" parent="MusicBox/coll_area" unique_id=1493327006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4072924, 0)
+billboard = 2
+text = "Touch to play some PHONK"
+font_size = 128
+
+[node name="PHONKBABY" type="AudioStreamPlayer3D" parent="MusicBox" unique_id=546205393]
+stream = ExtResource("9_7r4gi")
+
+[connection signal="body_entered" from="MusicBox/coll_area" to="." method="_on_coll_area_body_entered"]

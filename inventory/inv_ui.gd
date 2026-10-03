@@ -2,6 +2,7 @@ extends Control
 
 @onready var inv: Inv = preload("res://inventory/playerinv.tres")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
+@onready var reticle: Panel = $"../../Reticle"
 
 var is_open := false
 
@@ -24,7 +25,11 @@ func _process(delta: float) -> void:
 func open():
 	visible = true
 	is_open = true
+	reticle.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 func close():
 	visible = false
 	is_open = false
+	reticle.show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

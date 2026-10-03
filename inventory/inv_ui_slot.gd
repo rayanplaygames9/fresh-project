@@ -12,4 +12,4 @@ func update(slot: InvSlot):
 		item_visual.texture = slot.item.texture
 		if slot.amount > 1:
 			quantity_label.visible = true
-			quantity_label.text = str(slot.amount)
+		quantity_label.text = str(slot.amount)
