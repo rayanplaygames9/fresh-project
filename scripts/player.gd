@@ -78,6 +78,5 @@ func _on_sword_hitbox_body_entered(body: Node3D) -> void:
 		body.take_damage(sword_damage)
 		
 	# deal damage to cow too (or all animals)
-	if body.is_in_group("animals"):
-		print("a")
+	if body.has_method("take_damage") and body.is_in_group("animals"):
 		body.take_damage(sword_damage)
