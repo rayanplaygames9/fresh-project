@@ -4,6 +4,9 @@ extends CharacterBody3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health_bar: ProgressBar = $CanvasLayer/HUD/health_bar
 @onready var sword_hitbox: Area3D = $head/Camera3D/Sword/MeshInstance3D2/sword_hitbox
+@onready var slot: Panel = $CanvasLayer/HUD/slot
+@onready var slot_2: Panel = $CanvasLayer/HUD/slot2
+@onready var slot_3: Panel = $CanvasLayer/HUD/slot3
 
 const SPEED = 7.8
 const JUMP_VELOCITY = 10.0
@@ -12,6 +15,7 @@ var gravity := -30.0
 var mouse_sensitivity := 0.005
 var health := 5
 var sword_damage := 1
+var selected_slot = slot
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,6 +34,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		if animation_player.current_animation != "throw":
 			animation_player.play("throw")
 			sword_hitbox.monitoring = true
+			
+	if Input.is_action_just_pressed("1"):
+		selected_slot = slot
+	elif Input.is_action_just_pressed("2"):
+		selected_slot = slot_2
+	elif Input.is_action_just_pressed("3"):
+		selected_slot = slot_3
+		
+	print(selected_slot)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity

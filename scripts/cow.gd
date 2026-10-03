@@ -53,11 +53,10 @@ func take_damage(amount: int):
 		
 func die():
 	# drop raw steak (u need to cook it later lil bro life isnt easy)
-	var steak_instance = STEAK.instantiate()
-	steak_instance.position = Vector3(position.x, 1.0, position.z)
-	add_child(steak_instance)
 	
-	await get_tree().create_timer(.5)
+	var steak_instance = STEAK.instantiate()
+	steak_instance.position = position
+	get_tree().current_scene.add_child(steak_instance)
 	
 	queue_free()
 

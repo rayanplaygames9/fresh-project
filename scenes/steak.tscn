@@ -1,15 +1,13 @@
 [gd_scene format=4 uid="uid://q4tbrbdogxpr"]
 
 [ext_resource type="Texture2D" uid="uid://cc75o4c2u4bfu" path="res://assets/models/steak_0.png" id="1_3qkrq"]
-[ext_resource type="Texture2D" uid="uid://d2y8h64fm4ou2" path="res://assets/models/steak_1.png" id="2_u63e7"]
+[ext_resource type="Script" uid="uid://bn8qwejnj5clw" path="res://scripts/steak.gd" id="1_u63e7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1gc0l"]
 resource_name = "Steak"
 cull_mode = 2
+shading_mode = 0
 albedo_texture = ExtResource("1_3qkrq")
-roughness = 0.108190805
-normal_enabled = true
-normal_texture = ExtResource("2_u63e7")
 metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jlwuw"]
@@ -46,8 +44,21 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jlwuw")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_tapir"]
+radius = 0.23358859
+
 [node name="steak" type="Node3D" unique_id=84950046]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_u63e7")
 
 [node name="model" type="MeshInstance3D" parent="." unique_id=2109130610]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, -2.220446e-18, 0, 2.220446e-18, 0.01, 0.11085272, 0, 0.22468185)
 mesh = SubResource("ArrayMesh_4pn1d")
+
+[node name="pickup_area" type="Area3D" parent="." unique_id=760442122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10212824, 0, 0.2149792)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickup_area" unique_id=1331584983]
+shape = SubResource("SphereShape3D_tapir")
+
+[connection signal="body_entered" from="pickup_area" to="." method="_on_pickup_area_body_entered"]
