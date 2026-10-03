@@ -11,6 +11,27 @@ material = SubResource("StandardMaterial3D_ftooa")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k1nkd"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tapir"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1nkd"]
+emission_shape_scale = Vector3(2, 3, 5)
+angle_min = 5.000011
+angle_max = 45.00001
+velocity_pivot = Vector3(0, 5, 0)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -30, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hk6ki"]
+shading_mode = 0
+albedo_color = Color(0.7971827, 0, 0.14279658, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tapir"]
+material = SubResource("StandardMaterial3D_hk6ki")
+radius = 0.2
+height = 0.5
+
 [node name="zombie" type="CharacterBody3D" unique_id=2002552471 groups=["enemies"]]
 script = ExtResource("1_1vlb3")
 
@@ -31,5 +52,26 @@ use_3d_avoidance = true
 stream = ExtResource("2_httt1")
 volume_db = 11.375
 
-[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[node name="hit_detector" type="Area3D" parent="." unique_id=321997352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hit_detector" unique_id=463466279]
+shape = SubResource("CapsuleShape3D_tapir")
+
+[node name="label_health" type="Label3D" parent="." unique_id=1352244108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3261712, 0)
+billboard = 2
+text = "Health: 3"
+font_size = 64
+
+[node name="damage_particle" type="GPUParticles3D" parent="." unique_id=537729501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5564017, 0)
+emitting = false
+lifetime = 0.4
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_k1nkd")
+draw_pass_1 = SubResource("SphereMesh_tapir")
+
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+[connection signal="body_entered" from="hit_detector" to="." method="_on_hit_detector_body_entered"]

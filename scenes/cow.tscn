@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://ctqdd4hjxgal0"]
+
+[ext_resource type="Script" uid="uid://kiyeoohs2j3w" path="res://scripts/cow.gd" id="1_fgglk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hk6ki"]
+shading_mode = 0
+albedo_color = Color(0.48037344, 0.10727959, 0.0062257126, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_k1nkd"]
+material = SubResource("StandardMaterial3D_hk6ki")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p41vm"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1nkd"]
+direction = Vector3(1, 5, 0)
+initial_velocity_max = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgglk"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.3942782, 0.10700447, 0.012020439, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tapir"]
+material = SubResource("StandardMaterial3D_fgglk")
+radius = 0.2
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tapir"]
+radius = 0.6458388
+
+[node name="cow" type="CharacterBody3D" unique_id=1893121066]
+script = ExtResource("1_fgglk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1534441169]
+mesh = SubResource("SphereMesh_k1nkd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=860771573]
+shape = SubResource("SphereShape3D_p41vm")
+
+[node name="timer_change_dir" type="Timer" parent="." unique_id=1100293062 groups=["animals"]]
+wait_time = 5.0
+autostart = true
+
+[node name="damage_particle" type="GPUParticles3D" parent="." unique_id=1419917238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0690337, 0)
+emitting = false
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_k1nkd")
+draw_pass_1 = SubResource("SphereMesh_tapir")
+
+[node name="take_damage_detector" type="Area3D" parent="." unique_id=1135379665]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="take_damage_detector" unique_id=1754970833]
+shape = SubResource("SphereShape3D_tapir")
+
+[connection signal="timeout" from="timer_change_dir" to="." method="_on_timer_change_dir_timeout"]

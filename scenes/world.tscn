@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cl80bvtos3pqn" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_09_black.png" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://dq2edkex2s7pa" path="res://scenes/player.tscn" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://fduqf4otk1hw" path="res://assets/images/jumpscare.jpg" id="4_k0juu"]
+[ext_resource type="Texture2D" uid="uid://cysnk1kpeebn7" path="res://assets/kenney_particle-pack/PNG (Transparent)/flame_02.png" id="4_qfnet"]
+[ext_resource type="PackedScene" uid="uid://hx5luk0hknnf" path="res://scenes/zombie.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://ctqdd4hjxgal0" path="res://scenes/cow.tscn" id="7_i7141"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rwgxs"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,11 +24,12 @@ fog_light_color = Color(0.22418329, 0.24668661, 0.28170124, 1)
 fog_density = 1.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tapir"]
-vertices = PackedVector3Array(-9.5, 0.095, -9.5, -9.5, 0.095, 9.5, 9.5, 0.095, 9.5, 9.5, 0.095, -9.5)
+vertices = PackedVector3Array(-49.5, 0.075, -49.5, -49.5, 0.075, 49.5, 49.5, 0.075, 49.5, 49.5, 0.075, -49.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 cell_height = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1nkd"]
+albedo_color = Color(0.13553512, 0.35403022, 0, 1)
 albedo_texture = ExtResource("1_nnsk1")
 uv1_triplanar = true
 
@@ -36,46 +40,39 @@ size = Vector2(20, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhdjb"]
 size = Vector3(20, 0.01, 20)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wyf3"]
-shading_mode = 0
-albedo_color = Color(0.9517564, 0, 0.13104218, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hk6ki"]
+albedo_color = Color(0.27659816, 0.1176917, 0.030828563, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_tapir"]
-material = SubResource("StandardMaterial3D_4wyf3")
+[sub_resource type="BoxMesh" id="BoxMesh_k1nkd"]
+material = SubResource("StandardMaterial3D_hk6ki")
+size = Vector3(1.6757813, 0.3359375, 1.7275391)
 
-[sub_resource type="Gradient" id="Gradient_4wyf3"]
-offsets = PackedFloat32Array(0, 0.11510792, 1)
+[sub_resource type="Gradient" id="Gradient_qfnet"]
+offsets = PackedFloat32Array(0, 0.1294964, 0.9856115)
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_hk6ki"]
-gradient = SubResource("Gradient_4wyf3")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qfnet"]
+gradient = SubResource("Gradient_qfnet")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1nkd"]
-emission_shape_scale = Vector3(2, 3, 5)
-inherit_velocity_ratio = 0.117
-velocity_pivot = Vector3(3, 6, 1)
-direction = Vector3(13, 25, 3)
-initial_velocity_min = 5.0
-initial_velocity_max = 5.0
-angular_velocity_min = 11.999984
-angular_velocity_max = 11.999984
-gravity = Vector3(0, 3, 0)
-linear_accel_min = 11.999997
-linear_accel_max = 19.999998
-use_scale_3d = true
-scale_3d_min = Vector3(1, 1, 1)
-scale_3d_max = Vector3(2, 2, 2)
-color = Color(0.7273813, 0.14529493, 0, 1)
-color_ramp = SubResource("GradientTexture1D_hk6ki")
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p41vm"]
+gravity = Vector3(0, 5.6, 0)
+linear_accel_min = -1.0000023
+linear_accel_max = -2.2351742e-06
+color_ramp = SubResource("GradientTexture1D_qfnet")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0juu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjyuf"]
+transparency = 1
 shading_mode = 0
-albedo_color = Color(0.82769674, 0, 0.06827447, 1)
+albedo_color = Color(0.9999997, 0.43477342, 0.042933732, 1)
+albedo_texture = ExtResource("4_qfnet")
 billboard_mode = 2
 
-[sub_resource type="QuadMesh" id="QuadMesh_tapir"]
-material = SubResource("StandardMaterial3D_k0juu")
-size = Vector2(0.2, 0.2)
+[sub_resource type="QuadMesh" id="QuadMesh_alwvq"]
+material = SubResource("StandardMaterial3D_sjyuf")
+size = Vector2(2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p41vm"]
+size = Vector3(1.676, 0.336, 1.728)
 
 [node name="world" type="Node" unique_id=1945180217]
 script = ExtResource("1_4wyf3")
@@ -87,12 +84,13 @@ environment = SubResource("Environment_k0juu")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 
 [node name="player" parent="." unique_id=124275174 instance=ExtResource("2_rwgxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1969765214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 navigation_mesh = SubResource("NavigationMesh_tapir")
 
 [node name="floor" type="StaticBody3D" parent="NavigationRegion3D" unique_id=890093596]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/floor" unique_id=1585624133]
 mesh = SubResource("PlaneMesh_tapir")
@@ -100,19 +98,23 @@ mesh = SubResource("PlaneMesh_tapir")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/floor" unique_id=1154027872]
 shape = SubResource("BoxShape3D_jhdjb")
 
-[node name="zombie_spawner" type="Marker3D" parent="." unique_id=902028736]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7.888146)
+[node name="campfire" type="StaticBody3D" parent="NavigationRegion3D" unique_id=589658286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.2365954)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="zombie_spawner" unique_id=1496391077]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.58333844, 0)
-mesh = SubResource("BoxMesh_tapir")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/campfire" unique_id=779701455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33789063, 0.15244067, 0.36376953)
+mesh = SubResource("BoxMesh_k1nkd")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="zombie_spawner/MeshInstance3D" unique_id=1483608809]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.041538, 0)
-amount = 12
+[node name="GPUParticles3D" type="GPUParticles3D" parent="NavigationRegion3D/campfire/MeshInstance3D" unique_id=35972814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13415551)
+amount = 2
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_k1nkd")
-draw_pass_1 = SubResource("QuadMesh_tapir")
+process_material = SubResource("ParticleProcessMaterial_p41vm")
+draw_pass_1 = SubResource("QuadMesh_alwvq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/campfire" unique_id=642295231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28447533, 0, 0.28490663)
+shape = SubResource("BoxShape3D_p41vm")
 
 [node name="timer_zombie_spawn" type="Timer" parent="." unique_id=1163442340]
 wait_time = 10.0
@@ -128,3 +130,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_k0juu")
+
+[node name="zombie" parent="." unique_id=2002552471 instance=ExtResource("5_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5407476, -0.99500084, -6.2736874)
+
+[node name="cow" parent="." unique_id=1893121066 instance=ExtResource("7_i7141")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.72496, -0.47499943, -3.912961)
+
+[node name="cow2" parent="." unique_id=1925979390 instance=ExtResource("7_i7141")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5980797, -0.47499943, 11.033941)
+
+[node name="timer_cow_spawn" type="Timer" parent="." unique_id=1345317103]
+wait_time = 20.0
+autostart = true
