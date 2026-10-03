@@ -3,6 +3,8 @@ extends CharacterBody3D
 @onready var timer_change_dir: Timer = $timer_change_dir
 @onready var damage_particle: GPUParticles3D = $damage_particle
 
+const STEAK = preload("uid://q4tbrbdogxpr")
+
 var speed := 3.8
 var gravity := -30.0
 var health := 3
@@ -51,7 +53,11 @@ func take_damage(amount: int):
 		
 func die():
 	# drop raw steak (u need to cook it later lil bro life isnt easy)
+	var steak_instance = STEAK.instantiate()
+	steak_instance.position = Vector3(position.x, 1.0, position.z)
+	add_child(steak_instance)
 	
+	await get_tree().create_timer(.5)
 	
 	queue_free()
 
