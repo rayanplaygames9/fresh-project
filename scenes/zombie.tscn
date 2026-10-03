@@ -12,6 +12,7 @@ material = SubResource("StandardMaterial3D_ftooa")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k1nkd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tapir"]
+radius = 0.6640625
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1nkd"]
 emission_shape_scale = Vector3(2, 3, 5)
